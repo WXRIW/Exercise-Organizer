@@ -1,0 +1,53 @@
+﻿<Window x:Class="Exercise_Organizer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Exercise_Organizer"
+        mc:Ignorable="d" FontFamily="Microsoft YaHei UI"
+        Title="Exercise Organizer" Height="400" Width="600">
+    <Viewbox>
+        <Grid Height="310" Width="500">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Grid Name="GridType" Margin="10,10,0,0" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <RadioButton GroupName="Type" Content="选择题" Grid.Column="0"/>
+                <RadioButton GroupName="Type" Content="填空题" Grid.Column="1" IsChecked="True"/>
+            </Grid>
+            <Grid Name="GridProblemSource" Grid.Row="1" Margin="5" VerticalAlignment="Center">
+                <Label Content="题目来源" FontWeight="Bold"/>
+                <TextBox Name="TextBoxSource" VerticalContentAlignment="Center" Margin="70,0,0,0"/>
+            </Grid>
+            <Grid Name="GridChoice" Grid.Row="2" Visibility="Hidden">
+                <TextBlock Text="暂不可用" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+            <Grid Name="GridFillBlank" Grid.Row="2" Margin="5,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <TextBox Name="TextBoxFillBlank"/>
+                <Grid Name="GridFillBlankAnswer" Grid.Row="1" Margin="0" VerticalAlignment="Center">
+                    <Label Content="答案" FontWeight="Bold"/>
+                    <TextBox Name="TextBoxFillBlankAnswer" VerticalContentAlignment="Center" Margin="50,0,0,0"/>
+                </Grid>
+                <Grid Name="GridFillBlankButtons" Grid.Row="2" Margin="0,5,0,0">
+                    <Button Name="ButtonInsertBlank" Content="插入填空" HorizontalAlignment="Left" Width="150" Click="ButtonInsertBlank_Click"/>
+                    <Button Name="ButtonSaveFillBlank" Content="保存至题库" HorizontalAlignment="Right" Width="150" Click="ButtonSaveFillBlank_Click"/>
+                </Grid>
+            </Grid>
+            <Grid Name="GridControlButtons" Grid.Row="3" Margin="5,5,5,5">
+                <Button Name="ButtonSaveAll" Content="输出题库至文档" HorizontalAlignment="Right" Width="150" Click="ButtonSaveAll_Click"/>
+            </Grid>
+        </Grid>
+    </Viewbox>
+</Window>
