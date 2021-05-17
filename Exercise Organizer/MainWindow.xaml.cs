@@ -1,4 +1,5 @@
 ﻿using Exercise_Organizer.Json;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -67,6 +68,12 @@ namespace Exercise_Organizer
                 Directory.CreateDirectory(exerciseDataFolderPath);
             }
             File.WriteAllText(fileName, json);
+
+            if (CheckBoxAutoClear.IsChecked == true)
+            {
+                TextBoxFillBlank.Text = "";
+                TextBoxFillBlankAnswer.Text = "";
+            }
         }
 
         private ExerciseCommonData GetExerciseCommonData()
@@ -105,6 +112,10 @@ namespace Exercise_Organizer
                 if (englishFillBlank.ExerciseCommonData.OutputMark)
                 {
                     string text = englishFillBlank.Text;
+                    if(CheckBoxAutoFix.IsChecked == true)
+                    {
+                        text = TextAutoFix(text);
+                    }
                     if (englishFillBlank.ExerciseCommonData.SourceFrom != "")
                     {
                         text = "[" + englishFillBlank.ExerciseCommonData.SourceFrom + "] " + text;
@@ -139,6 +150,42 @@ namespace Exercise_Organizer
             Paragraph para = new Paragraph();
             para.Inlines.Add(run);
             richTextBox.Document.Blocks.Add(para);
+        }
+
+        private void TextBoxFillBlank_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ButtonAutoFix_Click(object sender, RoutedEventArgs e)
+        {
+            TextBoxFillBlank.Text = TextAutoFix(TextBoxFillBlank.Text);
+        }
+
+        public string TextAutoFix(string str)
+        {
+            str = str.Trim().Replace("（", "(").Replace("）", ")");
+            str = RemoveSpaceAround(str, "(");
+            str = RemoveSpaceAround(str, ")");
+            str = RemoveSpaceAround(str, ",").Replace(" ,", ",");
+            str = RemoveSpaceAround(str, ".").Replace(" .", ".");
+            str = str.Replace("  ", " ").Replace("  ", " ").Replace("--", "——");
+
+            str = str[0].ToString().ToUpper() + Strings.Mid(str, 2);
+
+            str = str.Replace("I'ii", "I'll").Replace(" i ", " I ");
+
+            return str;
+        }
+
+        public string RemoveSpaceAround(string str, string centerString)
+        {
+            str = str.Replace(centerString + " ", centerString)
+                     .Replace(" " + centerString, centerString)
+                     .Replace(centerString + " ", centerString)
+                     .Replace(" " + centerString, centerString)
+                     .Replace(centerString, " " + centerString + " ");
+            return str;
         }
     }
     public static class RichTextBoxEx

@@ -35,17 +35,20 @@
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="35"/>
                 </Grid.RowDefinitions>
-                <TextBox Name="TextBoxFillBlank"/>
+                <TextBox Name="TextBoxFillBlank" TextChanged="TextBoxFillBlank_TextChanged" AcceptsReturn="True" TextWrapping="Wrap"/>
                 <Grid Name="GridFillBlankAnswer" Grid.Row="1" Margin="0" VerticalAlignment="Center">
                     <Label Content="答案" FontWeight="Bold"/>
                     <TextBox Name="TextBoxFillBlankAnswer" VerticalContentAlignment="Center" Margin="50,0,0,0"/>
                 </Grid>
                 <Grid Name="GridFillBlankButtons" Grid.Row="2" Margin="0,5,0,0">
                     <Button Name="ButtonInsertBlank" Content="插入填空" HorizontalAlignment="Left" Width="150" Click="ButtonInsertBlank_Click"/>
+                    <Button Name="ButtonAutoFix" Content="自动标准化" HorizontalAlignment="Right" Margin="0,0,170,0" Width="150" Click="ButtonAutoFix_Click"/>
                     <Button Name="ButtonSaveFillBlank" Content="保存至题库" HorizontalAlignment="Right" Width="150" Click="ButtonSaveFillBlank_Click"/>
                 </Grid>
             </Grid>
             <Grid Name="GridControlButtons" Grid.Row="3" Margin="5,5,5,5">
+                <CheckBox Name="CheckBoxAutoClear" VerticalAlignment="Center" IsChecked="True" Content="自动清空"/>
+                <CheckBox Name="CheckBoxAutoFix" VerticalAlignment="Center" Margin="100,0,0,0" IsChecked="True" Content="自动标准化"/>
                 <Button Name="ButtonSaveAll" Content="输出题库至文档" HorizontalAlignment="Right" Width="150" Click="ButtonSaveAll_Click"/>
             </Grid>
         </Grid>
